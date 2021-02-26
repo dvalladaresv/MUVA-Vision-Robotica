@@ -1,9 +1,7 @@
 ---
 layout: page
 title: About me
-subtitle: My name is Barry vd. Heuvel
+subtitle: My name is David
 ---
 
-I'm a webdeveloper from Eindhoven. I'm one of the co-founders of [Fruitcake](https://fruitcake.nl), a webdevelopment agency in Sint-Oedenrode (NL). 
-
-If you like to contact me, feel free to send me an email or send me a message on Twitter: [@barryvdh](https://twitter.com/barryvdh)
+I am a student of the master of artificial vision at the rey juan carlos university. I am passionate about robotics and software development.
