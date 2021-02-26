@@ -1,7 +1,7 @@
 # --- General options --- #
 
 # Name of website
-title: Barry vd. Heuvel
+title: David VV
 
 # Short description of your site
 description: Webdeveloper, mostly focused on PHP. Co-founder and lead developer @ Fruitcake (NL)
@@ -22,7 +22,6 @@ description: Webdeveloper, mostly focused on PHP. Co-founder and lead developer 
 navbar-links:
   About Me: "about"
   Resources:
-    - Fruitcake: "https://fruitcake.nl/"
     - Github Profile: "https://github.com/dvalladaresv"
   Blog: "/"
 
