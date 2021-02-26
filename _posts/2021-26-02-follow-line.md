@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Follow Line
-date:       2021-26-02 18:00:00
+date:       2021-02-26 18:00:00
 excerpt:    Ejercicio sigue-linea con un formula1 simulado con el objetivo de cumpletar el circuito.
 categories: general
 ---
