@@ -41,12 +41,13 @@ A PD controller has also been used for speed. In order to adjust the speed accor
    > vel_error = kpv * abs(error_line) + abs(kdv * (error_line - last_error))
 
 ### Case-based controller
-We use a case-based controller to further fine-tune the speed, depending on whether we are on a straight, small curve, medium curve and large curve. To estimate what the curve looks like, we base it on the dispersion committed between the central point and the upper point.    
-     ![Puntos](/MUVA-Vision-Robotica/img/posts/follow-line/curva.png)   
-    1. If the error being made is small and the dispersion is also small. This indicates that we are on a straight line. So we increase the speed to twice the optimal speed.   
-    2. If the error that is being made is not very big and the dispersion is not so big either. This is due to a curve that is very light. So we go to the optimum speed.   
-    3. If the error is very large, this is because the curve is a bit steep. So the speed at which it will go will be the division between the optimal speed and the error_speed chosen in the PD.  
-    4 If finally the dispersion is very large, this is due to a very steep curve. So the speed will be given by the division between the optimum speed and the PI error speed, but penalizing it a little more, by a factor of 1.2.   
+We use a case-based controller to further fine-tune the speed, depending on whether we are on a straight, small curve, medium curve and large curve. To estimate what the curve looks like, we base it on the dispersion committed between the central point and the upper point.     
+   ![Puntos](/MUVA-Vision-Robotica/img/posts/follow-line/curva.png)    
+       
+   1. If the error being made is small and the dispersion is also small. This indicates that we are on a straight line. So we increase the speed to twice the optimal speed.     
+   2. If the error that is being made is not very big and the dispersion is not so big either. This is due to a curve that is very light. So we go to the optimum speed.      
+   3. If the error is very large, this is because the curve is a bit steep. So the speed at which it will go will be the division between the optimal speed and the error_speed chosen in the PD.    
+   4. If finally the dispersion is very large, this is due to a very steep curve. So the speed will be given by the division between the optimum speed and the PI error speed, but penalizing it a little more, by a factor of 1.2.     
 
 ## Conclusions
 With this algorithm, it has been possible to complete a lap of the circuit in about 50 seconds. Trying with other algorithms for example using only the PD controller for the turn and determining the speeds in a staggered manner with fixed values, I have been able to reach a time of 30 seconds. Even not getting such a good time in the chosen algorithm, I consider that it is adequate, since the speed is adjusting in a controlled way being more realistic. It also allows to adjust better to the line regardless of whether it is a straight or a curve.    
