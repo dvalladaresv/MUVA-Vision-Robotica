@@ -49,3 +49,8 @@ We use a case-based controller to further fine-tune the speed, depending on whet
     4 If finally the dispersion is very large, this is due to a very steep curve. So the speed will be given by the division between the optimum speed and the PI error speed, but penalizing it a little more, by a factor of 1.2.   
 
 ## Conclusions
+With this algorithm, it has been possible to complete a lap of the circuit in about 50 seconds. Trying with other algorithms for example using only the PD controller for the turn and determining the speeds in a staggered manner with fixed values, I have been able to reach a time of 30 seconds. Even not getting such a good time in the chosen algorithm, I consider that it is adequate, since the speed is adjusting in a controlled way being more realistic. It also allows to adjust better to the line regardless of whether it is a straight or a curve.    
+
+One of the difficulties I have encountered with the argorithm, is that when using two PD, four parameters are needed to be adjusted experimentally.   
+
+Finally, thanks to this practice I have been able to better understand how this type of controller works and its potential.    
