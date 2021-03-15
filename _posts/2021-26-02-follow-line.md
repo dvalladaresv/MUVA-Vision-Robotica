@@ -4,6 +4,7 @@ title:      Follow Line
 date:       2021-02-26 18:00:00
 excerpt:    This exercise consists of getting a simulated Formula1 to complete the circuit following a red line. Using the robot camera for this.
 categories: general
+share-img: /img/posts/follow_line/frame.png
 ---
 ## Introduction
 This exercise consists of getting our simulated formula 1 to complete the circuit by following a red line painted on the ground using the robot's camera. 
