@@ -31,24 +31,26 @@ And once obtained a series of processes are performed on it to obtain the line a
 ### PD controller for rotation
 A PD controller has been used to control the necessary rotation of the robot so that it does not go out of line.   
    1. The calculation of the error is determined by the average of the error of the reference with respect to the centroid and the error of the reference with respect to the upper point. The reason for using this error is because, on the one hand, if we only look at the centroid, this point is very close to the camera so it will not be able to anticipate the curves well. And if we rely only on the upper point if we anticipate the curves well, but it may be the case that the curve is very far away and we are anticipating too much. So we have opted for a compromise between the centroid and the upper point.    
-   > error_line = ((reference - cx) + (reference - topx))/2
+   > error = ((reference - cx) + (reference - point_topx))/2
    2. Then the expression that allows us to adjust is determined by the current error made and the previous error and weighted by the parameters kd (proportional) and kv (derivative), Then the expression that allows us to adjust is determined by the current error committed and the previous error and weighted by the parameters kd(proportional) and kv(derivative), whose values have been obtained experimentally.   
-   >  giro = kp * error_line + kd * (error_line - last_error)
+   >  giro = kp * error + kd * (error - last_error)
 
 ### PD controller for speed
 A PD controller has also been used for speed. In order to adjust the speed according to the straights and curves.   
    1. We calculate the error committed in a similar way as we did for the PD of the turn. The only difference is that we now use the parameters kpv(proportional) and kdv(derivative), also adjusted experimentally.   
-   > vel_error = kpv * abs(error_line) + abs(kdv * (error_line - last_error))
+   > error_vel = kpv * abs(error) + abs(kdv * (error - last_error))
 
 ### Case-based controller
-We use a case-based controller to further fine-tune the speed, depending on whether we are on a straight, small curve, medium curve and large curve. To estimate what the curve looks like, we base it on the dispersion committed between the central point and the upper point.     
+To further refine the velocity, we use a case-based controller, depending on whether we are on a straight line, a small curve, a medium curve, a large curve or a steep curve. To estimate what the curve looks like, we rely on the dispersion between the center point and the top point and the displacement error made.   
    ![Puntos](/MUVA-Vision-Robotica/img/posts/follow-line/curva.png)    
        
-   1. If the error being made is small and the dispersion is also small. This indicates that we are on a straight line. So we increase the speed to twice the optimal speed.     
-   2. If the error that is being made is not very big and the dispersion is not so big either. This is due to a curve that is very light. So we go to the optimum speed.      
-   3. If the error is very large, this is because the curve is a bit steep. So the speed at which it will go will be the division between the optimal speed and the error_speed chosen in the PD.    
-   4. If finally the dispersion is very large, this is due to a very steep curve. So the speed will be given by the division between the optimum speed and the PI error speed, but penalizing it a little more, by a factor of 1.2.     
-
+   1. If the error is too small (<5 px) or the dispersion is too small(<5 px). This indicates that we are dealing with a straight line. So we go to twice the optimal speed. We give the car a "turbo".   
+   2. If the error is not too large (<20 px) or the dispersion is not too large (<25 px). It indicates that we are facing a slightly curved terrain. So we can go to the optimal speed.   
+   3. If the dispersion is between 25 and 40 pixeles. This indicates that we are dealing with a medium curve terrain. So we adjust the velocity as the optimal velocity minus the error velocity obtained by the PD and it is also weighted by a factor of 0.2.   
+   4. If the dispersion is between 40 and 60 pixels. This is a very curved terrain. So we add the same velocity as in the previous case but now the error velocity is multiplied by a factor of 0.3.    
+   5. If the dispersion is already higher than 60 pixels. This is a very steep curve. So the speed is calculated as in the previous case but now the error rate is multiplied by 0.5.   
+   6. If we have lost the line, we try to recover it by turning the car.   
+   
 ## Conclusions
 With this algorithm, it has been possible to complete a lap of the circuit in about 50 seconds. Trying with other algorithms for example using only the PD controller for the turn and determining the speeds in a staggered manner with fixed values, I have been able to reach a time of 30 seconds. Even not getting such a good time in the chosen algorithm, I consider that it is adequate, since the speed is adjusting in a controlled way being more realistic. It also allows to adjust better to the line regardless of whether it is a straight or a curve.    
 
@@ -58,6 +60,6 @@ Finally, thanks to this practice I have been able to better understand how this 
 
 <div style="text-align: center">
     <video width="600px" height="400px" controls preload> 
-        <source src="/MUVA-Vision-Robotica/img/posts/follow-line/p1_follow_line.mp4"></source> 
+        <source src="/MUVA-Vision-Robotica/img/posts/follow_line/p1_follow_line.mp4"></source> 
     </video>
 </div>
