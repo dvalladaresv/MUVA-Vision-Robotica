@@ -55,3 +55,9 @@ With this algorithm, it has been possible to complete a lap of the circuit in ab
 One of the difficulties I have encountered with the argorithm, is that when using two PD, four parameters are needed to be adjusted experimentally.   
 
 Finally, thanks to this practice I have been able to better understand how this type of controller works and its potential.    
+
+<div style="text-align: center">
+    <video width="600px" height="400px" controls preload> 
+        <source src="/MUVA-Vision-Robotica/img/follow_line_solution.mp4"></source> 
+    </video>
+</div>
