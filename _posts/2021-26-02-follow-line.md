@@ -60,6 +60,6 @@ Finally, thanks to this practice I have been able to better understand how this 
 
 <div style="text-align: center">
     <video width="600px" height="400px" controls preload> 
-        <source src="/MUVA-Vision-Robotica/img/posts/follow_line/p1_follow_line.mp4"></source> 
+        <source src="/MUVA-Vision-Robotica/img/posts/follow-line/p1_follow_line.mp4"></source> 
     </video>
 </div>
