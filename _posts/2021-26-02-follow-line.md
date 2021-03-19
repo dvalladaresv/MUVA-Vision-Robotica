@@ -45,9 +45,15 @@ To further refine the velocity, we use a case-based controller, depending on whe
    ![Puntos](/MUVA-Vision-Robotica/img/posts/follow-line/curva.png)    
        
    1. If the error is too small (<5 px) or the dispersion is too small(<5 px). This indicates that we are dealing with a straight line. So we go to twice the optimal speed. We give the car a "turbo".     
-   2. If the error is not too large (<20 px) or the dispersion is not too large (<25 px). It indicates that we are facing a slightly curved terrain. So we can go to the optimal speed. This speed has been calculated experimentally.      3. If the dispersion is between 25 and 40 pixeles. This indicates that we are dealing with a medium curve terrain. So we adjust the velocity as the optimal velocity minus the error velocity obtained by the PD and it is also weighted by a factor of 0.2.   
+   > vel = vel_opt*2
+   2. If the error is not too large (<20 px) or the dispersion is not too large (<25 px). It indicates that we are facing a slightly curved terrain. So we can go to the optimal speed. This speed has been calculated experimentally.      
+   > vel = vel_opt
+   3. If the dispersion is between 25 and 40 pixeles. This indicates that we are dealing with a medium curve terrain. So we adjust the velocity as the optimal velocity minus the error velocity obtained by the PD and it is also weighted by a factor of 0.2.   
+   > vel = vel_opt - error_vel*0.2
    4. If the dispersion is between 40 and 60 pixels. This is a very curved terrain. So we add the same velocity as in the previous case but now the error velocity is multiplied by a factor of 0.3.    
+   > vel = vel_opt - error_vel*0.3
    5. If the dispersion is already higher than 60 pixels. This is a very steep curve. So the speed is calculated as in the previous case but now the error rate is multiplied by 0.5.   
+   > vel = vel_opt - error_vel*0.5
    6. If we have lost the line, we try to recover it by turning the car.   
    
 ## Conclusions
