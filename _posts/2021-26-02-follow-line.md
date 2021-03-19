@@ -56,7 +56,8 @@ To further refine the velocity, we use a case-based controller, depending on whe
    5. If the dispersion is already higher than 60 pixels. This is a very steep curve. So the speed is calculated as in the previous case but now the error rate is multiplied by 0.5.   
    > vel = vel_opt - error_vel*0.5
    6. If we have lost the line, we try to recover it by turning the car.   
-   Note: If the error speed is higher than the optimum speed, we assume that the error speed will be equal to the optimum speed, to avoid problems in the speed setting.   
+
+Note: If the error speed is higher than the optimum speed, we assume that the error speed will be equal to the optimum speed, to avoid problems in the speed setting.   
    
 ## Conclusions
 With this algorithm, it has been possible to complete a lap of the circuit in about 50 seconds. Trying with other algorithms for example using only the PD controller for the turn and determining the speeds in a staggered manner with fixed values, I have been able to reach a time of 30 seconds. Even not getting such a good time in the chosen algorithm, I consider that it is adequate, since the speed is adjusting in a controlled way being more realistic. It also allows to adjust better to the line regardless of whether it is a straight or a curve.    
