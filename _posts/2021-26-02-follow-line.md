@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Follow Line
-date:       2021-02-26 18:00:00
+date:       2021-03-19 18:00:00
 excerpt:    This exercise consists of getting a simulated Formula1 to complete the circuit following a red line. Using the robot camera for this.
 categories: general
 share-img: /img/posts/follow_line/poll.png
@@ -32,7 +32,7 @@ And once obtained a series of processes are performed on it to obtain the line a
 A PD controller has been used to control the necessary rotation of the robot so that it does not go out of line.   
    1. The calculation of the error is determined by the average of the error of the reference with respect to the centroid and the error of the reference with respect to the upper point. The reason for using this error is because, on the one hand, if we only look at the centroid, this point is very close to the camera so it will not be able to anticipate the curves well. And if we rely only on the upper point if we anticipate the curves well, but it may be the case that the curve is very far away and we are anticipating too much. So we have opted for a compromise between the centroid and the upper point.    
    > error = ((reference - cx) + (reference - point_topx))/2
-   2. Then the expression that allows us to adjust is determined by the current error made and the previous error and weighted by the parameters kd (proportional) and kv (derivative), Then the expression that allows us to adjust is determined by the current error committed and the previous error and weighted by the parameters kd(proportional) and kv(derivative), whose values have been obtained experimentally.   
+   2. Then the expression that allows us to adjust is determined by the current error made and the previous error and weighted by the parameters kd (proportional) and kv (derivative), whose values have been obtained experimentally.   
    >  giro = kp * error + kd * (error - last_error)
 
 ### PD controller for speed
@@ -44,9 +44,8 @@ A PD controller has also been used for speed. In order to adjust the speed accor
 To further refine the velocity, we use a case-based controller, depending on whether we are on a straight line, a small curve, a medium curve, a large curve or a steep curve. To estimate what the curve looks like, we rely on the dispersion between the center point and the top point and the displacement error made.   
    ![Puntos](/MUVA-Vision-Robotica/img/posts/follow-line/curva.png)    
        
-   1. If the error is too small (<5 px) or the dispersion is too small(<5 px). This indicates that we are dealing with a straight line. So we go to twice the optimal speed. We give the car a "turbo".   
-   2. If the error is not too large (<20 px) or the dispersion is not too large (<25 px). It indicates that we are facing a slightly curved terrain. So we can go to the optimal speed.   
-   3. If the dispersion is between 25 and 40 pixeles. This indicates that we are dealing with a medium curve terrain. So we adjust the velocity as the optimal velocity minus the error velocity obtained by the PD and it is also weighted by a factor of 0.2.   
+   1. If the error is too small (<5 px) or the dispersion is too small(<5 px). This indicates that we are dealing with a straight line. So we go to twice the optimal speed. We give the car a "turbo".     
+   2. If the error is not too large (<20 px) or the dispersion is not too large (<25 px). It indicates that we are facing a slightly curved terrain. So we can go to the optimal speed. This speed has been calculated experimentally.      3. If the dispersion is between 25 and 40 pixeles. This indicates that we are dealing with a medium curve terrain. So we adjust the velocity as the optimal velocity minus the error velocity obtained by the PD and it is also weighted by a factor of 0.2.   
    4. If the dispersion is between 40 and 60 pixels. This is a very curved terrain. So we add the same velocity as in the previous case but now the error velocity is multiplied by a factor of 0.3.    
    5. If the dispersion is already higher than 60 pixels. This is a very steep curve. So the speed is calculated as in the previous case but now the error rate is multiplied by 0.5.   
    6. If we have lost the line, we try to recover it by turning the car.   
