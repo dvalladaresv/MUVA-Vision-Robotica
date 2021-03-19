@@ -43,6 +43,7 @@ A PD controller has also been used for speed. In order to adjust the speed accor
 ### Case-based controller
 To further refine the velocity, we use a case-based controller, depending on whether we are on a straight line, a small curve, a medium curve, a large curve or a steep curve. To estimate what the curve looks like, we rely on the dispersion between the center point and the top point and the displacement error made.   
    ![Puntos](/MUVA-Vision-Robotica/img/posts/follow-line/curva.png)    
+   > disper = point_topx - point_med
        
    1. If the error is too small (<5 px) or the dispersion is too small(<5 px). This indicates that we are dealing with a straight line. So we go to twice the optimal speed. We give the car a "turbo".     
    > vel = vel_opt*2
