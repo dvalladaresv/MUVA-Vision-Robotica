@@ -24,10 +24,23 @@ Once the images are obtained, they are converted on:
 ## Algorithm   
 
 ### Feature Point Detection
+The first step is to extract the minutiae that we want to reconstruct in 3D. For this we use a Canny filter, which allows us to detect the edges in the image. In addition we add a morphological Closure operation to eliminate possible errors and further refine the edges.   
+![Images HSV](/MUVA-Vision-Robotica/img/posts/3d-reconstruction/canny.png) 
 
 ### Matching search
+Taking the left image as a reference, for each of the characteristic points, we look for its counterpart in the right image. For each point we look at its neighborhood (patch, in our case it is 23*23) and we look for a similar patch in the other camera.    
+- To avoid having to search the whole image, we search on the epipolar line, the projection of the back projection ray of the pixel in the right camera. We will not only search on the epipolar line, but also on the epipolar fringe, we give a margin of 10 pixels, for possible errors in the calibration.   
+- We also use the attentive restriction, not to search the whole epipolar fringe, but only those that are characteristic points in the right image.   
+- For the patch comparison we have used the HSV color space correlation, which is more robust to illumination changes.    
+<div style="text-align: center">
+    <video width="600px" height="400px" controls preload> 
+        <source src="/MUVA-Vision-Robotica/img/posts/3d-reconstruction/macthcing_video.mp4"></source> 
+    </video>
+</div>
 
 ### Triangulation
+Once the correspondences are obtained, for each point we throw the back projection ray, and calculate the minimum point between these two lines. If the Euclidean distance is less than a threshold (in our case 0.4), we consider it to be a good 3d point and project it.    
+![Triangulation](/MUVA-Vision-Robotica/img/posts/3d-reconstruction/proyeccion.png) {#Fuente:José Miguel Buenaposada Biencinto}
 
 ## Conclusions
 With this algorithm, it has been possible to complete a lap of the circuit in about 50 seconds. Trying with other algorithms for example using only the PD controller for the turn and determining the speeds in a staggered manner with fixed values, I have been able to reach a time of 30 seconds. Even not getting such a good time in the chosen algorithm, I consider that it is adequate, since the speed is adjusting in a controlled way being more realistic. It also allows to adjust better to the line regardless of whether it is a straight or a curve.    
@@ -38,6 +51,6 @@ Finally, thanks to this practice I have been able to better understand how this 
 
 <div style="text-align: center">
     <video width="600px" height="400px" controls preload> 
-        <source src="/MUVA-Vision-Robotica/img/posts/follow-line/p1_follow_line.mp4"></source> 
+        <source src="/MUVA-Vision-Robotica/img/posts/3d-reconstruction/3d_reconstruction_video.mp4"></source> 
     </video>
 </div>
