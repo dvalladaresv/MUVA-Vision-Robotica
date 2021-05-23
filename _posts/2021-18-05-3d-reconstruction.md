@@ -39,7 +39,7 @@ Taking the left image as a reference, for each of the characteristic points, we 
 
 ### 3. Triangulation
 Once the correspondences are obtained, for each point we throw the back projection ray, and calculate the minimum point between these two lines. If the Euclidean distance is less than a threshold (in our case 0.4), we consider it to be a good 3d point and project it.    
-![Triangulation](/MUVA-Vision-Robotica/img/posts/3d-reconstruction/proyeccion.png)
+![Triangulation](/MUVA-Vision-Robotica/img/posts/3d-reconstruction/proyeccion.png)    
                 Fuente: José Miguel Buenaposada Biencinto       
 
 ## Solution   
