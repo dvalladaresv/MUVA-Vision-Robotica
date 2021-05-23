@@ -17,7 +17,7 @@ The first step is to obtain the images from both cameras:
 
 Once the images are obtained, they are converted on: 
    - The one hand to grayscale, which will be necessary for contour detection    
-        ![Images Gray](/MUVA-Vision-Robotica/img/posts/3d-reconstruction-line/gray.png)   
+        ![Images Gray](/MUVA-Vision-Robotica/img/posts/3d-reconstruction/gray.png)   
    - And on the other hand to the HSV(Hue, Saturation, Value) color space, which will be used to calculate the correlation in the correspondence search stage.           
         ![Images HSV](/MUVA-Vision-Robotica/img/posts/3d-reconstruction/hsv.png)   
         
