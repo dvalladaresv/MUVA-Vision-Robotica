@@ -23,11 +23,11 @@ Once the images are obtained, they are converted on:
         
 ## Algorithm   
 
-### Feature Point Detection
+### 1. Feature Point Detection
 The first step is to extract the minutiae that we want to reconstruct in 3D. For this we use a Canny filter, which allows us to detect the edges in the image. In addition we add a morphological Closure operation to eliminate possible errors and further refine the edges.   
 ![Images HSV](/MUVA-Vision-Robotica/img/posts/3d-reconstruction/canny.png) 
 
-### Matching search
+### 2. Matching search
 Taking the left image as a reference, for each of the characteristic points, we look for its counterpart in the right image. For each point we look at its neighborhood (patch, in our case it is 23*23) and we look for a similar patch in the other camera.    
 - To avoid having to search the whole image, we search on the epipolar line, the projection of the back projection ray of the pixel in the right camera. We will not only search on the epipolar line, but also on the epipolar fringe, we give a margin of 10 pixels, for possible errors in the calibration.   
 - We also use the attentive restriction, not to search the whole epipolar fringe, but only those that are characteristic points in the right image.   
@@ -38,9 +38,9 @@ Taking the left image as a reference, for each of the characteristic points, we 
     </video>
 </div>
 
-### Triangulation
+### 3. Triangulation
 Once the correspondences are obtained, for each point we throw the back projection ray, and calculate the minimum point between these two lines. If the Euclidean distance is less than a threshold (in our case 0.4), we consider it to be a good 3d point and project it.    
-![Triangulation](/MUVA-Vision-Robotica/img/posts/3d-reconstruction/proyeccion.png) {#Fuente:José Miguel Buenaposada Biencinto}
+![Triangulation](/MUVA-Vision-Robotica/img/posts/3d-reconstruction/proyeccion.png){#Fuente:José Miguel Buenaposada Biencinto}   
 
 ## Conclusions
 Utilizando este algoritmo de para estéreo hemos podido reconstruir la escena 3D.
