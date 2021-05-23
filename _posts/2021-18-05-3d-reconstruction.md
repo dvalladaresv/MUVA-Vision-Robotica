@@ -28,7 +28,7 @@ The first step is to extract the minutiae that we want to reconstruct in 3D. For
 
 ### 2. Matching search
 Taking the left image as a reference, for each of the characteristic points, we look for its counterpart in the right image. For each point we look at its neighborhood (patch, in our case it is 23*23) and we look for a similar patch in the other camera.    
-- To avoid having to search the whole image, we search on the epipolar line, the projection of the back projection ray of the pixel in the right camera. We will not only search on the epipolar line, but also on the epipolar fringe, we give a margin of 10 pixels, for possible errors in the calibration.     
+- To avoid having to search the whole image, we search on the epipolar line, the projection of the back projection ray of the pixel in the right camera. We will not only search on the epipolar line, but also on the epipolar fringe, we give a margin of \pm10 pixels, for possible errors in the calibration.     
 - We also use the attentive restriction, not to search the whole epipolar fringe, but only those that are characteristic points in the right image.   
 - For the patch comparison we have used the HSV color space correlation, which is more robust to illumination changes.    
 <div style="text-align: center">
